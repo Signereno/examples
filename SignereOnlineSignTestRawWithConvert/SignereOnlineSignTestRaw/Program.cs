@@ -13,11 +13,10 @@ namespace SignereTest
     {
         static void Main(string[] args)
         {
-            string apiID = "e846c26e-01b9-4529-b1ab-a5f5008f1167";
-            string primaryApiKey =
-                "VFBveTUwZ3p0a3hxTFo2czV0WVdsUT09LDVMOTM4dm5rZk53bTB5Zks1K21razRYYmhFOWhEL1VmaXFZNkEvUXBtdnM9";
+            string apiID = "Enter your API ID here";
+            string primaryApiKey = "Enter your primary API key here";
             string baseUrl = "https://testapi.signere.no/api/";
-            //Konverterer først dokumentet; trenger ikke token for denne ressursen
+            //We first convert the document to PDF
             string requestUrl = baseUrl + "DocumentConvert";
             string convertedPdfString="";
             try
@@ -33,14 +32,14 @@ namespace SignereTest
 
             }
 
-            //Oppretter så en signeringsrequest
+            //Then we create a signature request
             var signRequestObj =
                 new
                 {
                     ConvertToPDFA2b = false,
                     CreatedByApplication = "testSignApplication",
                     CreatePADES = true,
-                    Description = "Dette er en signeringstest",
+                    Description = "This is a signature test",
                     DocumentType = "PDF",
                     ExternalDocumentId = "123",
                     ExternalRef = "abc",
@@ -49,9 +48,9 @@ namespace SignereTest
                     GetSocialSecurityNumber = false,
                     HideDetailsPage = true,
                     IdentityProvider = "NO_BANKID_WEB",
-                    ReturnUrlSuccess = "http://www.dokflyt.no#success",
-                    ReturnUrlError = "http://www.dokflyt.no#error",
-                    ReturnUrlUserAbort = "http://www.dokflyt.no#abort",
+                    ReturnUrlSuccess = "http://www.vg.no#success",
+                    ReturnUrlError = "http://www.vg.no#error",
+                    ReturnUrlUserAbort = "http://www.vg.no#abort",
                     Language = "NO",
                     Title = "Testdokument",
                     UrlExpiresMinutes = 5,
@@ -61,11 +60,10 @@ namespace SignereTest
                         {
                             new
                             {
-                                CompanyName = "Dokflyt AS",
-                                Email = "amund@flytit.no",
-                                FirstName = "Amund",
-                                LastName = "Skullerud",
-                                Mobile = "41564807"
+                                CompanyName = "Testcompany AS",
+                                Email = "test@test.com",
+                                FirstName = "Testmann",
+                                LastName = "Testesen",
                             }
                         },
                     UseWebMessaging = true,
@@ -117,7 +115,7 @@ namespace SignereTest
             {
 
             }
-            Console.WriteLine("Trykk en tast når du er ferdig med å signere...");
+            Console.WriteLine("Press a key when you are done signing...\n");
             Console.ReadKey();  
         }
     

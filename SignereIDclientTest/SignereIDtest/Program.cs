@@ -31,15 +31,15 @@ namespace SignereIDtest
             };
 
             var res = id.CreateRequest(req);
-            string uri = res.Url; //Dette er URLen som sluttbruker må bruke – putt den i nettleseren og prøv
+            string uri = res.Url; //This is the URL for the end user
 
             Process.Start(uri);
-            //Sluttbruker gjennomfører BankID-innlogging og hitter SuccessUrl...
-            Console.WriteLine("Trykk en tast når du er ferdig med innloggingen...\n");
+            //The end user identifies himself/herself using BankID and hits the SuccessUrl
+            Console.WriteLine("Press a key when you are done identifying yourself\n");
             Console.ReadKey();
             var result = id.GetResponse(res.RequestId); //Henter tilbake BankID-data med bruk av requestID
             Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
-            Console.WriteLine("\nTrykk en tast for å avslutte");
+            Console.WriteLine("\nPress a key to finish");
             Console.ReadKey();
         }
     }

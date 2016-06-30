@@ -13,9 +13,8 @@ namespace SignereTest
     {
         static void Main(string[] args)
         {
-            string apiID = "78a45d9f-4de6-4833-ba15-a5f500bf4a27";
-            string primaryApiKey =
-                "WklvSkEzK2YySE5tMVhuM1lMaVZqQT09LEUxWHMxRTRzcHA2U0VKUWxvVlJFcWNRRnBuOEV3b3ZSVkZuUmFyQWVndHc9";
+            string apiID = "Enter your API ID here";
+            string primaryApiKey = "Enter your primary API key here";
             string baseUrl = "https://testapi.signere.no/api/";
             string documentString = Convert.ToBase64String(File.ReadAllBytes("Testdokument.pdf"));
 
@@ -26,7 +25,7 @@ namespace SignereTest
                     ConvertToPDFA2b = false,
                     CreatedByApplication = "testSignApplication",
                     CreatePADES = true,
-                    Description = "Dette er en signeringstest",
+                    Description = "This is a signature test",
                     DocumentType = "PDF",
                     ExternalDocumentId = "123",
                     ExternalRef = "abc",
@@ -35,9 +34,9 @@ namespace SignereTest
                     GetSocialSecurityNumber = false,
                     HideDetailsPage = true,
                     IdentityProvider = "NO_BANKID_WEB",
-                    ReturnUrlSuccess = "http://www.otovo.no#success",
-                    ReturnUrlError = "http://www.otovo.no#error",
-                    ReturnUrlUserAbort = "http://www.otovo.no#abort",
+                    ReturnUrlSuccess = "http://www.vg.no#success",
+                    ReturnUrlError = "http://www.vg.no#error",
+                    ReturnUrlUserAbort = "http://www.vg.no#abort",
                     Language = "NO",
                     Title = "Testdokument",
                     UrlExpiresMinutes = 5,
@@ -47,11 +46,10 @@ namespace SignereTest
                         {
                             new
                             {
-                                CompanyName = "Otovo AS",
-                                Email = "simen@otovo.no",
-                                FirstName = "Simen",
-                                LastName = "Jørgensen",
-                                Mobile = "92030173"
+                                CompanyName = "Testcompany AS",
+                                Email = "test@test.com",
+                                FirstName = "Testmann",
+                                LastName = "Testesen",
                             }
                         },
                     UseWebMessaging = true,
@@ -100,7 +98,7 @@ namespace SignereTest
             {
 
             }
-            Console.WriteLine("Trykk en tast når du er ferdig med å signere...");
+            Console.WriteLine("Press a key when you are done signing...\n");
             Console.ReadKey();  
         }
     
