@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://az833285.vo.msecnd.net/favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>JS Signere Sign Client Test</title>
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+    <h1>Signere.no EasySign demo!</h1>
+	<br/>
+<p>
+    <button class="btn btn-default" id="button" onclick="createSignature()" style="text-align:center;"><img src="https://az833285.vo.msecnd.net/favicon.ico"/>&nbsp;Start signering!</button>
+	</p>
+	<pre id="result" style="display:none"></pre>
+	</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- signere sign client-->
+    <script src="https://signerejs.azureedge.net/5b4b9d991e73499fb3c2a65c00eab563.js"></script>
+	
+    <script>
+    	var rootPath="https://"+window.location.hostname+window.location.pathname.replace("index.html","");
+        var sigObj =
+        {
+            ExternalDocumentRef: "0123456789", //ekstern referanse
+            DocumentTitle: "JsSign testdokument", //tittel for signering
+            DocumentDescription: "Test document to sign... Lorem ipsum dolor sit amet, " +
+                "consectetur adipiscing elit. Sed id tristique diam. Nunc vel dui porttitor, " +
+                "gravida ligula eu, sagittis turpis. Phasellus eu aliquam mi. In convallis " +
+                "tellus at nulla sollicitudin euismod. Duis quis nunc dictum erat ornare aliquam. " +
+                "Aenean mattis tincidunt dictum. Class aptent taciti sociosqu ad litora torquent " +
+                "per conubia nostra, per inceptos himenaeos. Fusce viverra hendrerit dolor et " +
+                "faucibus. Mauris iaculis quam justo.", //beskrivelse av dokument
+            DocumentUrl: rootPath+"UnitTestDoc.pdf", //url hvor dokument kan lastes ned
+            DocumentItemDescription: "Dokumenttittel", //tittel på dokument
+            ErrorUrl: rootPath+"index.html#error?errorcode=[2]", //url man blir redirect-et til ved feil 
+            CancelUrl: rootPath+"index.html#cancel", //url man blir redirect-et til hvis bruker avbryter
+            SuccessUrl: rootPath+"index.html#success?jssignjwt=[jssignjwt]", //url man blir redirect-et til ved suksess
+            SigneeRefs: [],
+        };
+		
+		function createSignature(){
+		try{
+			signere.CreateSignature(sigObj);
+			}catch(e){
+			console.log(e);
+			}
+		}
+
+		if(window.location.hash.indexOf('jssignjwt')!==-1 || window.location.search.indexOf('jssignjwt')!==-1 && signere){
+			document.getElementById('result').style.display = 'block'; 
+			signere.ParseSignatureResult(function(result){
+			document.getElementById('result').innerHTML=JSON.stringify(result, null, 2);
+			});
+			
+		}
+    </script>
+</body>
+</html>
