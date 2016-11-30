@@ -12,9 +12,9 @@ namespace SignereOfflineTestWithClient
     {
         static void Main(string[] args)
         {
-            string apiID = "Enter your API ID here"
-            string primaryApiKey = "Enter your primary API key here"
-            Client client = new Client("https://testapi.signere.no", new Guid(apiID), primaryApiKey,false,true,true);
+            string apiID = "Enter your API ID here";
+            string primaryApiKey = "Enter your primary API key here";
+            Client client = new Client("https://testapi.signere.no", new Guid(apiID), primaryApiKey, false, true, true);
             NewDocument document = new NewDocument()
             {
                 Language = NewDocument.Languages.NO,
@@ -27,18 +27,18 @@ namespace SignereOfflineTestWithClient
                         new SigneeRef()
                         {
                             ExternalSigneeId = "12345",
-                            Email = "enter the recipients' email address here",
-                            Mobile = "enter the recipients' mobile number here",
+                            Email = "test@test.com", //Enter signee's email address to receive signing link
+                            Mobile = "+4799999999", //Enter signee's phone number to receive SMS notification, including country code (+XXX)"
                             FirstName = "Testmann",
                             LastName = "Testesen"
                         }
                     },
                 CreatePADES = true,
-                MessageEmail = "enter the email text here",
-                MessageSms = "enter the sms text here",
-                SenderEmail = "enter the sender's email address here",
-                SenderMobile = "enter the sender's mobile number here",
-                TopicEmail = "enter the topic of the email here",
+                MessageEmail = "Hi! You have received a document to sign. Press the link below to sign", //enter the email text here
+                MessageSms = "Hi! You have received a document to sign. Please check your e-mail.", //enter the SMS text here
+                SenderEmail = "test@test.com", //enter the sender's email address here
+                SenderMobile = "+4799999999", //enter the sender's mobile number here
+                TopicEmail = "Document to sign", //"enter the topic of the email here
                 ExternalDocumentId = "123435",
                 SignDeadline = DateTime.Today.AddDays(3),
                 DoNotNotifySigneeRefs = false,
@@ -51,8 +51,8 @@ namespace SignereOfflineTestWithClient
                 NotifySigneerefsWhenSignedEmail = false,
                 NotifySigneerefsWhenSignedSMS = false,
                 Private = false,
-                ReceiptMessageEmail = "enter the text of the receipt email here",
-                ReceiptTopicEmail = "enter the topic of the receipt email here",
+                ReceiptMessageEmail = "Receipt", //enter the text of the receipt email here,
+                ReceiptTopicEmail = "Test document has been signed", //enter the topic of the receipt email here"
                 ShowOnSigneesPersonalSite = true,
                 CreatedByApplication = "test",
                 ConvertToPDFA2b = false,
@@ -64,11 +64,12 @@ namespace SignereOfflineTestWithClient
             {
                 var documentJobId = client.CreateDocumentJob(new DocumentJob()
                 {
-                    Contact_Email = "enter contact email address here",
-                    Contact_Mobile = "enter contact mobile number here",
-                    Contact_Phone = "enter contact phone number here",
-                    Contact_Name = "enter contact person's name here",
-                    Contact_Url = "enter contact website here"
+                    //contact information for the sender of the document
+                    Contact_Email = "test@test.com",
+                    Contact_Mobile = "+4799999999",
+                    Contact_Name = "Testmann Testesen",
+                    Contact_Phone = "+4799999999",
+                    Contact_Url = "https://www.test.com"
                 });
                 client.CreateDocumentInJob(document, documentJobId, "Testdokument.pdf");
             }

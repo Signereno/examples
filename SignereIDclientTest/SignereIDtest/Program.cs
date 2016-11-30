@@ -29,18 +29,24 @@ namespace SignereIDtest
                 ExternalReference = "1234",
                 IdentityProvider = IdentityProviderType.NO_BANKID_WEB
             };
-
-            var res = id.CreateRequest(req);
-            string uri = res.Url; //This is the URL for the end user
-
-            Process.Start(uri);
-            //The end user identifies himself/herself using BankID and hits the SuccessUrl
-            Console.WriteLine("Press a key when you are done identifying yourself\n");
-            Console.ReadKey();
-            var result = id.GetResponse(res.RequestId); //Henter tilbake BankID-data med bruk av requestID
-            Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
-            Console.WriteLine("\nPress a key to finish");
-            Console.ReadKey();
+            try
+            {
+                var res = id.CreateRequest(req);
+                string uri = res.Url; //This is the URL for the end user
+                Process.Start(uri);
+                //The end user identifies himself/herself using BankID and hits the SuccessUrl
+                Console.WriteLine("Press a key when you are done identifying yourself\n");
+                Console.ReadKey();
+                var result = id.GetResponse(res.RequestId); //Fetching back the result using the RequestID
+                Console.WriteLine(JsonConvert.SerializeObject(result, Formatting.Indented));
+                Console.WriteLine("\nPress a key to finish");
+                Console.ReadKey();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
         }
     }
 }

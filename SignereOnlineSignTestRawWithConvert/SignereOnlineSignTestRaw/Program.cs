@@ -16,6 +16,7 @@ namespace SignereTest
             string apiID = "Enter your API ID here";
             string primaryApiKey = "Enter your primary API key here";
             string baseUrl = "https://testapi.signere.no/api/";
+
             //We first convert the document to PDF
             string requestUrl = baseUrl + "DocumentConvert";
             string convertedPdfString="";
@@ -29,7 +30,7 @@ namespace SignereTest
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
 
             //Then we create a signature request
@@ -64,6 +65,7 @@ namespace SignereTest
                                 Email = "test@test.com",
                                 FirstName = "Testmann",
                                 LastName = "Testesen",
+                                Mobile="+4799999999"
                             }
                         },
                     UseWebMessaging = true,
@@ -113,7 +115,7 @@ namespace SignereTest
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             Console.WriteLine("Press a key when you are done signing...\n");
             Console.ReadKey();  

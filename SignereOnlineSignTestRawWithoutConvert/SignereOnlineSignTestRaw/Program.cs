@@ -18,7 +18,6 @@ namespace SignereTest
             string baseUrl = "https://testapi.signere.no/api/";
             string documentString = Convert.ToBase64String(File.ReadAllBytes("Testdokument.pdf"));
 
-            //Oppretter en signeringsrequest
             var signRequestObj =
                 new
                 {
@@ -50,6 +49,7 @@ namespace SignereTest
                                 Email = "test@test.com",
                                 FirstName = "Testmann",
                                 LastName = "Testesen",
+                                Mobile="+4799999999"
                             }
                         },
                     UseWebMessaging = true,
@@ -58,7 +58,6 @@ namespace SignereTest
 
             WebClient webClient=new WebClient();
             string timestamp= webClient.DownloadString(baseUrl + "Status/ServerTime").Replace("\"","");
-            //string timestamp = DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss");
             var token = GenerateTokenForJson(reqBody, "POST", primaryApiKey, timestamp);
             Encoding encoding = new UTF8Encoding();
             HttpWebRequest signRequest = (HttpWebRequest) WebRequest.Create(baseUrl + "ExternalSign");
@@ -96,7 +95,7 @@ namespace SignereTest
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             Console.WriteLine("Press a key when you are done signing...\n");
             Console.ReadKey();  

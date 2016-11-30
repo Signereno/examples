@@ -14,7 +14,7 @@ namespace SignereOnlineSignTest
     {
         static void Main(string[] args)
         {
-            string apiID = "Enter your API ID here";          
+            string apiID = "Enter your API ID here";
             string primaryApiKey = "Enter your primary API key here";
             string baseurl = "https://testapi.signere.no";
             Client client = new Client(baseurl,new Guid(apiID),primaryApiKey,false,true,true);
@@ -47,6 +47,7 @@ namespace SignereOnlineSignTest
                             Email = "test@test.com",
                             FirstName = "Testmann",
                             LastName = "Testesen",
+                            Mobile = "+4799999999" //"Enter user's mobile number here" //"If you don't have it, you can safely enter a dummy number like +4799999999 as nothing will be sent to this number"
                         }
                     },
                 UseWebMessaging = true,
@@ -65,7 +66,7 @@ namespace SignereOnlineSignTest
             }
             catch (Exception e)
             {
-                
+                Console.WriteLine(e.Message);
             }
         }
     }
