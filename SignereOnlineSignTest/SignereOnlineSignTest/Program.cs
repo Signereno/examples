@@ -47,7 +47,7 @@ namespace SignereOnlineSignTest
                             Email = "test@test.com",
                             FirstName = "Testmann",
                             LastName = "Testesen",
-                            Mobile = "+4799999999" //"Enter user's mobile number here" //"If you don't have it, you can safely enter a dummy number like +4799999999 as nothing will be sent to this number"
+                            Mobile = "+4799999999" //Enter user's mobile number here. If you don't have it, you can safely enter a dummy number like +4799999999 as nothing will be sent to this number
                         }
                     },
                 UseWebMessaging = true,
