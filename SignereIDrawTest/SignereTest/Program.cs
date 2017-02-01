@@ -15,13 +15,13 @@ namespace SignereTest
     {
         static void Main(string[] args)
         {
-            string apiID = "Enter your API ID here";
-            string primaryApiKey = "Enter your primary API key here";
-            string url = "https://testapi.signere.no/api/SignereId";
+            string apiID = "9be54fd9-6983-4ecf-8bab-a33e00cebecb";
+            string primaryApiKey = "N0NFclJyZkpZV0lqbVdEUG1ySG5Wdz09LDAzQTd2MDhuQkx2WnFvcGNsK2RRSUQ5V2w2N1hUamUrdTFNN3ZUMkZ5VFk9";
+            string url = "https://api.signere.no/api/SignereId";
 
             var requestObj = new {CancelUrl = "https://www.vg.no#cancel", ErrorUrl="https://www.vg.no#error", SuccessUrl="http://www.vg.no#success", ExternalReference="123", IdentityProvider="NO_BANKID_WEB"};
             var reqBody = JsonConvert.SerializeObject(requestObj, Formatting.None);
-            string timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss");
+            string timestamp = DateTime.UtcNow.ToString("s");
             var token = GenerateTokenForJson(reqBody, "POST", primaryApiKey, timestamp);
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);            
